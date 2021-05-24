@@ -16,6 +16,7 @@ export class Product {
   // so it has its own props (color, battery durability, inside material etc.)
   // However, I think this solution is better in this case since its easier to introduce new products
   description?: string;
+  imageUrl?: string;
 
   constructor(v: Product | Partial<Product> = {}) {
     Object.assign(this, v);
