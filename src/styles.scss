@@ -5,3 +5,14 @@
 body {
   @apply h-full w-full max-w-7xl mx-auto bg-gray-100;
 }
+
+
+.btn {
+  @apply transition font-medium pr-4 pl-3 py-2 rounded-md flex items-center shadow-sm;
+  &.primary {
+    @apply bg-primary-600 hover:bg-primary-500 text-white;
+  }
+  &.secondary {
+    @apply bg-secondary-200 hover:bg-secondary-300 text-black;
+  }
+}
