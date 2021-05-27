@@ -9,7 +9,7 @@ export class Product {
   manufacturer!: string;
   categories!: Category[];
   priceCents!: number;
-  onSale?: boolean;
+  onSale!: boolean;
   // This comes with problems when scaling since we may need translations.
   // Also, the whole class could be abstracted so every
   // product type would be extended by the abstract product class,
@@ -20,7 +20,7 @@ export class Product {
 
   constructor(v: Product | Partial<Product> = {}) {
     Object.assign(this, v);
-    // Not necessary since it can be caught with form validation
+    // Not necessary since it can be caught with form + ts validation
     // though a good example on how to handle optional/default values in a class model
     this.categories = v.categories ?? [];
     this.description = v.description ?? '';
@@ -29,5 +29,16 @@ export class Product {
 
   get price(): number {
     return this.priceCents / 100;
+  }
+
+  // Checks if category is already added, removes it if so
+  // otherwise, it adds given category to the categories array
+  toggleCategory(category: Category): void {
+    const categoryIndex = this.categories.indexOf(category);
+    if (categoryIndex !== -1) {
+      this.categories.splice(categoryIndex, 1);
+    } else {
+      this.categories.push(category);
+    }
   }
 }
