@@ -7,7 +7,7 @@ export class Product {
   id!: string;
   name!: string;
   manufacturer!: string;
-  categories?: Category[];
+  categories!: Category[];
   priceCents!: number;
   onSale?: boolean;
   // This comes with problems when scaling since we may need translations.
@@ -15,7 +15,7 @@ export class Product {
   // product type would be extended by the abstract product class,
   // so it has its own props (color, battery durability, inside material etc.)
   // However, I think this solution is better in this case since its easier to introduce new products
-  description?: string;
+  description!: string;
   imageUrl?: string;
 
   constructor(v: Product | Partial<Product> = {}) {
