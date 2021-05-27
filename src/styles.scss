@@ -8,7 +8,7 @@ body {
 
 
 .btn {
-  @apply transition font-medium pr-4 pl-3 py-2 rounded-md flex items-center shadow-sm;
+  @apply transition font-medium px-4 py-2 rounded-md flex items-center shadow-sm;
   &.primary {
     @apply bg-primary-600 hover:bg-primary-500 text-white;
   }
