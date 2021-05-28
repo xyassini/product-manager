@@ -2,6 +2,15 @@
 
 A simple example project
 
+# Important Notes
+
+This project uses [Nx](https://nx.dev) for build caching, this provides us with faster build times, especially in development.
+To generate Angular services, components etc., run the nx command as following:
+`npx nx g @nrwl/angular:<type>` instead of `ng g <type>`.
+
+You can run `npm run start` to start a local development version of the application with Nx.
+For a production build, use `npm run build`.
+
 # Issues
 
 I didn't want to make this project perfect from the beginning - it's an example project and I think it's also good to
@@ -10,7 +19,7 @@ these issues.
 
 ## Performance bottlenecks
 
-I wanted to implement things MVP style, so I didn't have an emphasis on performance for now.
+I wanted to implement things MVP style, so I didn't put an emphasis on performance, code style and best practices too much.
 
 ### Using getter methods in templates
 
