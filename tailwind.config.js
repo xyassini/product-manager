@@ -1,7 +1,17 @@
 const colors = require('tailwindcss/colors')
+const { guessProductionMode } = require('@ngneat/tailwind');
+
+process.env.TAILWIND_MODE = guessProductionMode() ? 'build' : 'watch';
 
 module.exports = {
-  purge: [],
+  prefix: '',
+  mode: 'jit',
+  purge: {
+    content: [
+      './apps/**/*.{html,ts,css,scss,sass,less,styl}',
+      './libs/**/*.{html,ts,css,scss,sass,less,styl}'
+    ]
+  },
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -10,12 +20,10 @@ module.exports = {
         secondary: colors.trueGray,
         gray: colors.warmGray
       }
-    },
+    }
   },
   variants: {
-    extend: {},
+    extend: {}
   },
-  plugins: [
-    require('@tailwindcss/forms')
-  ],
-}
+  plugins: [require('@tailwindcss/forms')]
+};
