@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "nx",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "npx nx serve",
+    "build": "npx nx run product-manager:serve:development",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "postinstall": "node ./decorate-angular-cli.js"
