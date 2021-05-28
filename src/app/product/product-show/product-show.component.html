@@ -42,11 +42,11 @@
     </p>
     <h6 class='mt-1 text-gray-600 font-medium'>Description:</h6>
     <p class='max-w-md text-gray-600' style='white-space: pre-line'>
-      {{product?.description}}
+      {{product?.description ? product!.description : 'No description given'}}
     </p>
     <h6 class='mt-3 text-gray-600 font-medium'>Categories:</h6>
     <p class='text-gray-600'>
-      {{product?.capitalizedCategories?.join(', ')}}
+      {{product?.categories?.length ? product!.capitalizedCategories!.join(', ') : 'No categories'}}
     </p>
   </div>
 </div>
