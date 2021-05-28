@@ -11,6 +11,9 @@ body {
   @apply transition font-medium px-4 py-2 rounded-md flex items-center shadow-sm;
   &.primary {
     @apply bg-primary-600 hover:bg-primary-500 text-white;
+    &:disabled {
+      @apply bg-primary-400 text-gray-200 cursor-default;
+    }
   }
   &.secondary {
     @apply bg-secondary-200 hover:bg-secondary-300 text-black;
