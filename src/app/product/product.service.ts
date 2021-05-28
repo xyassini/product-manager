@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Product } from './product.model';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { concatMap, take, tap } from 'rxjs/operators';
+import { concatMap, map, take, tap } from 'rxjs/operators';
 import { Category } from './category.enum';
 
 @Injectable({
@@ -63,6 +63,19 @@ export class ProductService {
         this.products$.next(products);
       }),
       concatMap(() => product$)
+    );
+  }
+
+  get(id: string): Observable<Product> {
+    return this.products$.pipe(
+      map(products => {
+        const result = products.find(product => product.id === id);
+        if (result) {
+          return result;
+        } else {
+          throw new Error('This product doesn\'t exist.');
+        }
+      })
     );
   }
 }

@@ -37,4 +37,20 @@ describe('ProductService', () => {
       });
     });
   });
+
+  describe('get', () => {
+    it('returns product with id 8PP432-DD342', (done) => {
+      service.get('8PP432-DD342').subscribe(product => {
+        expect(product).toEqual(service.products$.value[1]);
+        done();
+      });
+    });
+
+    it('should throw error if product doesn\'t exist', (done) => {
+      service.get('random').subscribe(() => ({}), err => {
+        expect(err).toBeTruthy();
+        done();
+      });
+    });
+  });
 });
