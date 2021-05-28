@@ -1,1 +1,1 @@
-<p>product-edit works!</p>
+<app-product-form *ngIf='product' [(product)]='product' (formCancel)='cancel()' (formSubmit)='submit($event)'></app-product-form>
