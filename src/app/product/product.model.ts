@@ -21,6 +21,7 @@ export class Product {
 
   constructor(v: Product | Partial<Product> = {}) {
     Object.assign(this, v);
+    this.id = v.id ?? Math.random().toString(36).substring(7);
     // Not necessary since it can be caught with form + ts validation
     // though a good example on how to handle optional/default values in a class model
     this.categories = v.categories ?? [];
