@@ -1,27 +1,36 @@
 # ProductManager
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.1.
+A simple example project
 
-## Development server
+# Issues
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+I didn't want to make this project perfect from the beginning - it's an example project and I think it's also good to
+show off mistakes and implementation issues that are recognized and well explained. In the following, I explain some of
+these issues.
 
-## Code scaffolding
+## Performance bottlenecks
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+I wanted to implement things MVP style, so I didn't have an emphasis on performance for now.
 
-## Build
+### Using getter methods in templates
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```angular2html
+{{product.capitalizedCategories}}
+```
 
-## Running unit tests
+`capitalizedCategories` is a getter method in the `Product` class that looks like this:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```typescript
+class Product {
+  // returns the categories array as capitalized strings
+  get capitalizedCategories(): string[] {
+    return this.categories.map(category => capitalizeFirstLetter(category));
+  }
+}
+```
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Since this getter method transforms our categories by mapping them to a new value returned by
+the `capitalizeFirstLetter` method. Considering Angular's ChangeDetection cycles, which run on even on mouse moves, this
+can become a pretty heavy computation. Of course the effects can be downplayed by using `ChangeDetectionStrategy.OnPush`
+, but if we have buttons, inputs etc. which trigger change detection, the getter method will still get called
+unnecessarily often
