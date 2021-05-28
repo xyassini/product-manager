@@ -53,4 +53,11 @@ describe('ProductCreateComponent', () => {
       });
     }));
   });
+
+  describe('cancel', () => {
+    it('should navigate to list on cancel', () => {
+      component.cancel();
+      expect(component['router'].navigate).toHaveBeenCalledWith(['/']);
+    });
+  });
 });
