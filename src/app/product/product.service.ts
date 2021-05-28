@@ -92,4 +92,15 @@ export class ProductService {
       })
     );
   }
+
+  delete(id: string): Observable<Product[]> {
+    return this.products$.pipe(
+      take(1),
+      tap(products => {
+        const index = products.findIndex(prod => prod.id === id);
+        products.splice(index, 1);
+        this.products$.next(products);
+      })
+    );
+  }
 }

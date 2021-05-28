@@ -63,4 +63,14 @@ describe('ProductService', () => {
       });
     });
   });
+
+  describe('delete', () => {
+    it('should delete product correctly', (done) => {
+      service.delete('2348R7-R3423').subscribe(products => {
+        expect(service.products$.value.length).toEqual(2);
+        expect(products.length).toEqual(2);
+        done();
+      });
+    });
+  });
 });
