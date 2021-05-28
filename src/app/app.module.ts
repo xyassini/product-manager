@@ -5,6 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { ProductListItemModule } from './product/product-list/product-list-item/product-list-item.module';
+import { registerLocaleData } from '@angular/common';
+
+import localeDe from '@angular/common/locales/de';
+registerLocaleData(localeDe);
 
 @NgModule({
   declarations: [
@@ -19,4 +23,5 @@ import { ProductListItemModule } from './product/product-list/product-list-item/
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
