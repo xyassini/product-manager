@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProductListItemComponent } from './product-list-item.component';
 import { Category } from '../../category.enum';
 import { Product } from '../../product.model';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ProductListItemComponent', () => {
   let component: ProductListItemComponent;
@@ -9,9 +10,9 @@ describe('ProductListItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ProductListItemComponent]
-    })
-      .compileComponents();
+      declarations: [ProductListItemComponent],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProductFormComponent } from './product-form.component';
 import { FormsModule } from '@angular/forms';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ProductFormComponent', () => {
   let component: ProductFormComponent;
@@ -9,7 +10,8 @@ describe('ProductFormComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ProductFormComponent],
-      imports: [FormsModule]
+      imports: [FormsModule],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 

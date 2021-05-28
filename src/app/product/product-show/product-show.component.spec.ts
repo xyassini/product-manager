@@ -8,6 +8,7 @@ import { Product } from '../product.model';
 import { Category } from '../category.enum';
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ProductShowComponent', () => {
   let component: ProductShowComponent;
@@ -31,6 +32,7 @@ describe('ProductShowComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ProductShowComponent],
       imports: [RouterTestingModule],
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [
         {
           provide: ActivatedRoute,

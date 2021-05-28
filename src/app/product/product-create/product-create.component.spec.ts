@@ -3,6 +3,7 @@ import { ProductCreateComponent } from './product-create.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Product } from '../product.model';
 import { Category } from '../category.enum';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ProductCreateComponent', () => {
   let component: ProductCreateComponent;
@@ -11,7 +12,8 @@ describe('ProductCreateComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ProductCreateComponent],
-      imports: [RouterTestingModule]
+      imports: [RouterTestingModule],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 
