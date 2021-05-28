@@ -4,7 +4,8 @@
       {{product?.name}}
       <span class='text-gray-600'>by {{product?.manufacturer}}</span>
     </h4>
-    <span *ngIf='product?.onSale' class='bg-green-200 text-green-700 uppercase px-2 py-1 rounded-md font-medium text-sm'>
+    <span *ngIf='product?.onSale'
+          class='bg-green-200 text-green-700 uppercase px-2 py-1 rounded-md font-medium text-sm'>
       On sale
     </span>
     <span *ngIf='!product?.onSale' class='bg-gray-200 text-gray-700 uppercase px-2 py-1 rounded-md font-medium text-sm'>
@@ -12,6 +13,14 @@
     </span>
   </div>
   <div class='flex items-center space-x-6'>
+    <a class='flex flex-col items-center text-gray-500 hover:text-primary-600 transition'
+       [routerLink]='["/"]'>
+      <svg class='w-6 h-6' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>
+        <path fill-rule='evenodd' clip-rule='evenodd'
+              d='M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z'></path>
+      </svg>
+      <p class='text-sm'>Show All</p>
+    </a>
     <a class='flex flex-col items-center text-gray-500 hover:text-primary-600 transition'
        [routerLink]='["/", product?.id, "edit"]'>
       <svg class='w-6 h-6' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>
