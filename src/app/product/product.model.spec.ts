@@ -29,6 +29,12 @@ describe('ProductModel', () => {
     });
   });
 
+  describe('capitalizedCategories', () => {
+    it('should return correct value', () => {
+      expect(product.capitalizedCategories).toEqual(['Sport', 'Watch']);
+    });
+  });
+
   describe('toggleCategory', () => {
     it('should delete existing category', () => {
       product.toggleCategory(Category.WATCH);

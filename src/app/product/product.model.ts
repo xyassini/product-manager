@@ -1,4 +1,5 @@
 import { Category } from './category.enum';
+import { capitalizeFirstLetter } from '../utils/capitalize-first-letter';
 
 // Since I am not using any store to query data
 // I thought using a class as a model is a better approach
@@ -25,10 +26,20 @@ export class Product {
     this.categories = v.categories ?? [];
     this.description = v.description ?? '';
     this.onSale = v.onSale ?? false;
+    this.priceCents = v.priceCents ?? 0;
+    this.imageUrl = v.imageUrl ?? 'https://images.unsplash.com/photo-1614469723922-c043ad9fd036?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1568&q=80';
   }
 
+  // using getter methods is resource intensive,
+  // since Angular's Change Detection triggers the
+  // computation on every cycle
   get price(): number {
     return this.priceCents / 100;
+  }
+
+  // returns the categories array as capitalized strings
+  get capitalizedCategories(): string[] {
+    return this.categories.map(category => capitalizeFirstLetter(category));
   }
 
   // Checks if category is already added, removes it if so
