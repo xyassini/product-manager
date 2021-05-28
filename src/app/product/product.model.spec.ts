@@ -27,6 +27,11 @@ describe('ProductModel', () => {
     it('should return correct value', () => {
       expect(product.price).toEqual(110.0);
     });
+
+    it('should set correct value', () => {
+      product.price = 80;
+      expect(product.priceCents).toEqual(8000);
+    });
   });
 
   describe('capitalizedCategories', () => {

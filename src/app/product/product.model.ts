@@ -37,6 +37,13 @@ export class Product {
     return this.priceCents / 100;
   }
 
+  // using getter methods is resource intensive,
+  // since Angular's Change Detection triggers the
+  // computation on every cycle
+  set price(value: number) {
+    this.priceCents = value * 100;
+  }
+
   // returns the categories array as capitalized strings
   get capitalizedCategories(): string[] {
     return this.categories.map(category => capitalizeFirstLetter(category));
