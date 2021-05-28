@@ -38,6 +38,16 @@ describe('ProductService', () => {
     });
   });
 
+  describe('update', () => {
+    it('should update product correctly', (done) => {
+      service.update('2348R7-R3423', { name: 'Test' }).subscribe(product => {
+        expect(service.products$.value[0].name).toEqual('Test');
+        expect(product.name).toEqual('Test');
+        done();
+      });
+    });
+  });
+
   describe('get', () => {
     it('returns product with id 8PP432-DD342', (done) => {
       service.get('8PP432-DD342').subscribe(product => {
