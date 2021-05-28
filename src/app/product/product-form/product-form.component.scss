@@ -1,0 +1,7 @@
+.ng-valid[required].ng-touched  {
+  @apply border border-green-400;
+}
+
+.ng-invalid.ng-touched:not(form)  {
+  @apply border border-red-400;
+}

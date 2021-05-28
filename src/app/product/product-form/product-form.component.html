@@ -1,0 +1,108 @@
+<form class='max-w-lg' (ngSubmit)='onSubmit()' #form='ngForm'>
+  <div class='flex items-end space-x-4'>
+    <div class='w-24 h-20 rounded shadow-sm overflow-hidden'>
+      <img *ngIf='product.imageUrl' [src]='product.imageUrl' alt='Produktbild'
+           class='h-full w-full object-cover'>
+      <div *ngIf='!product.imageUrl' class='bg-gray-400 h-full w-full'></div>
+    </div>
+
+    <div class='flex-grow'>
+      <label for='imageUrl' class='block text-sm font-medium text-gray-700'>Image URL</label>
+      <div class='mt-1'>
+        <input type='text' name='imageUrl' id='imageUrl' placeholder='Image URL' #imageUrl='ngModel'
+               [(ngModel)]='product.imageUrl' (ngModelChange)='validateImageUrl()'
+               class='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'>
+        <ng-container *ngIf='imageUrl.invalid && imageUrl.touched'>
+          <span *ngIf='imageUrl.errors?.invalidUrl' class='text-sm text-red-500'>
+            The image URL seems to be invalid
+          </span>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class='mt-3'>
+    <label for='name' class='block text-sm font-medium text-gray-700'>Name *</label>
+    <div class='mt-1'>
+      <input type='text' name='name' id='name' placeholder='My cool product' [(ngModel)]='product.name'
+             class='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+             required minlength='3' #name='ngModel'>
+      <ng-container *ngIf='name.invalid && name.touched'>
+        <!-- Decided to keep these error messages together since it's bad UX to tell an user that an input is required, -->
+        <!-- just to tell them that they need at least 3 characters afterwards -->
+        <span *ngIf='name.errors?.required || name.errors?.minlength' class='text-sm text-red-500'>
+          The product name should have at least 3 characters
+        </span>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class='mt-3'>
+    <label for='manufacturer' class='block text-sm font-medium text-gray-700'>Manufacturer *</label>
+    <div class='mt-1'>
+      <input type='text' name='manufacturer' id='manufacturer' placeholder='Super LLC'
+             class='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+             [(ngModel)]='product.manufacturer' #manufacturer="ngModel" required>
+      <ng-container *ngIf='manufacturer.invalid && manufacturer.touched'>
+        <span *ngIf='manufacturer.errors?.required' class='text-sm text-red-500'>
+          A product needs a manufacturer name
+        </span>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class='mt-3 flex items-end space-x-4'>
+    <div class='flex-grow'>
+      <label for='price' class='block text-sm font-medium text-gray-700'>Price</label>
+      <div class='mt-1'>
+        <!-- I wouldn't use ngx-currency-mask for a larger application since it lacks proper l10n and validation support -->
+        <input type='text' name='price' id='price' [(ngModel)]='product.priceCents' currencyMask
+               [options]='{suffix: " €", prefix: "", decimal: ",", thousands: ".", min: 0, align: "left"}'
+               class='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'>
+      </div>
+    </div>
+
+    <div class='grid grid-cols-2'>
+      <div class='relative flex items-center mb-2'>
+        <div class='flex items-center'>
+          <input id='onSale' name='onSale' type='checkbox' [(ngModel)]='product.onSale'
+                 class='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded'>
+        </div>
+        <div class='ml-3 text-sm'>
+          <label for='onSale' class='font-medium text-gray-700'>On Sale</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='mt-3'>
+    <label for='description' class='block text-sm font-medium text-gray-700'>Description</label>
+    <div class='mt-1'>
+      <textarea id='description' name='description' rows='3' [(ngModel)]='product.description'
+                class='max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md'></textarea>
+      <p class='mt-1 text-sm text-gray-500'>Write a few sentences about the product</p>
+    </div>
+  </div>
+
+  <p class='block text-sm font-medium text-gray-700 mt-4 mb-2'>Categories</p>
+  <div class='mt-4 sm:mt-0 sm:col-span-2'>
+    <div class='max-w-lg grid grid-cols-2'>
+      <div *ngFor='let category of categories' class='relative flex items-center mb-2'>
+        <div class='flex items-center'>
+          <input id='category_{{category}}' name='category_{{category}}' type='checkbox'
+                 [ngModel]='product.categories.includes(category)' (ngModelChange)='product.toggleCategory(category)'
+                 class='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded'>
+        </div>
+        <div class='ml-3 text-sm'>
+          <label for='category_{{category}}'
+                 class='font-medium text-gray-700'>{{capitalizeFirstLetter(category)}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='flex items-center space-x-2 mt-3 justify-end'>
+    <button class='btn secondary' type='button' (click)='formCancel.emit()'>Cancel</button>
+    <button class='btn primary' type='submit' [disabled]='form.invalid'>Submit</button>
+  </div>
+</form>
