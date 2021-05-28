@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductListComponent } from './product/product-list/product-list.component';
+import { ProductResolver } from './product/product.resolver';
 
 // Lazy loading the first loaded component results in a longer initial loading time
 // I've decided to lazy load the create route to show off lazy loading
@@ -13,6 +14,13 @@ const routes: Routes = [
   {
     path: 'create',
     loadChildren: () => import('./product/product-create/product-create.module').then(m => m.ProductCreateModule)
+  },
+  {
+    path: ':id',
+    resolve: {
+      product: ProductResolver
+    },
+    loadChildren: () => import('./product/product-show/product-show.module').then(m => m.ProductShowModule)
   }
 ];
 
@@ -20,4 +28,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
