@@ -66,6 +66,20 @@ export class ProductService {
     );
   }
 
+  update(id: string, updates: Partial<Product> | Product): Observable<Product> {
+    let product$!: Observable<Product>;
+    return this.products$.pipe(
+      take(1),
+      tap(products => {
+        const index = products.findIndex(prod => prod.id === id);
+        Object.assign(products[index], updates);
+        this.products$.next(products);
+        product$ = of(products[index]).pipe(take(1));
+      }),
+      concatMap(() => product$)
+    );
+  }
+
   get(id: string): Observable<Product> {
     return this.products$.pipe(
       map(products => {
