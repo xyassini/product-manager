@@ -9,6 +9,8 @@ import { Product } from '../../product.model';
 })
 export class ProductListItemComponent implements OnInit {
   @Input() product!: Product;
+  // Set this to false to hide show/edit/delete buttons
+  @Input() withControls = true;
 
   constructor() { }
 
